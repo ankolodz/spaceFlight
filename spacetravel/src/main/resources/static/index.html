@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Space Flight</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="sheet.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+<body onload="load()">
+
+<div class="container-fluid text-center bg-dark text-white">
+  <h1>Loty w Kosmos</h1>
+  <p>Zwiedź galaktykę już dziś</p> 
+</div>
+<div class="row allPage w3-display-container">
+    <div class="col-sm-7 allPage" id="rows"></div>
+    <div class="col-sm-5 allPage">
+        <div class="board" id="0">
+            <H1>Tylko 3 kroki</H1>
+            <H3>Dzielą Cię od Twojego Pierwszego lotu!</H3>
+            <br><br><p><input type="input" onchange="loadFlight()" class="w3-button btn-outline-danger w3-red w3-jumbo" onclick="nextScreen(1)" value="Start"></p>
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>    
+        </div>
+        
+        <div class="board" id="1" style="display: none;">
+            <H1>Wybierz połączenie</H1>
+            <H3>Wybierz jeden z proponowanych lotów</H3>
+            <br><br>
+            <br>
+            <input type="button" class="w3-button btn-outline-danger w3-red w3-xxxlarge" onclick="nextScreen(2)" value="Dalej">
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>    
+        </div>
+
+        <div class="board" id="2" style="display: none;">
+          <H2>Jeszcze  tylko kilka informacji</H2>
+          <H3>Czy o Twój pierwszy lot z nami?</H3>
+          <br><br>
+          <div style="text-align: center;">
+            <input type="button" class="w3-button btn-outline-danger w3-red w3-jumbo w3-margin" onclick="nextScreen(3)" value="Tak">
+            <input type="button" class="w3-button btn-outline-danger w3-red w3-jumbo w3-margin" onclick="nextScreen(4)" value="Nie">
+        </div>
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>    
+      </div>
+        
+        
+        
+        
+        <div class="board" id="3" style="display: none;">
+          <div class="form">
+            <form class="w3-container" id="newTourist" >
+              <div id="form1">
+                <H2>Opowiedz nam coś o sobie</H2>
+                  <H3>Imię</H3>
+                  <input class="w3-input" type="text" id="name" placeholder="John">
+                  
+                  <H3>Nazwisko</H3>
+                  <input class="w3-input" type="text" id="sourname" placeholder="Smith">
+
+                  <H3>Płeć</H3>
+                  <select class="w3-select" id="sex">
+                    <option value="M">Mężczyzna</option>
+                    <option value="K">Kobieta</option>
+                  </select> 
+                  <br><br>
+                  <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div> 
+                  <div class="input w3-button btn-outline-danger w3-red w3-xxxlarge" onclick="nextFrom()">Dalej</div>
+            </div>
+
+
+            <div id="form2" style="display: none;">
+
+                <H3>Kaj</H3>
+                <input class="w3-input" type="text" id="country" placeholder="Poland">
+
+                <H3>Uwagi</H3>
+                <input class="w3-input" type="text" id="notes" placeholder="">
+
+                <H3>Data Urodzenia</H3>
+                <input class="w3-input" type="date" id="birthDate">
+                <br>
+                <div class="progress">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> 
+              <input type="button" class="w3-button btn-outline-danger w3-red w3-xxxlarge" onClick="submitTourist()" value="Wyślij">
+
+            </div>
+              </form>
+
+            </div>
+
+          </div>
+
+
+          <div class="board" id="4" style="display: none;">
+            <H1>Podaj swój ID</H1>
+            <br><br>
+            <div style="text-align: center;">
+              
+              <form action="http://localhost:9000/tourist/add" method="PUT">
+                <H2>Twój ID</H2>
+                <input class="w3-input" type="text" id="TouristID">
+                <H2>ID Lotu</H2>
+                <input class="w3-input" type="text" id="FlightID" disabled>
+
+            </form>
+          </div>
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+            </div> 
+            <input type="button" class="w3-button btn-outline-danger w3-red w3-xxxlarge" onClick="submitFlight()" value="Potwierdź">   
+        </div>
+
+
+        <div class="board" id="5" style="display: none;">
+          <H1>Dziękujemy</H1>
+          <H2>Twój lot został dodany</H2>
+          
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div> 
+
+      </div>
+
+
+    </div>
+  </div> 
+
+
+</body>
+</html>
+<script>
+var actuallPage = 0;
+var waitforResult = '<p><i class="w3-display-middle fa fa-spinner w3-spin" style="font-size:78pt; color:maroon;"></i></p>';
+function load(){
+    
+}
+function nextFrom (){
+  document.getElementById("form1").style.display='none';
+    document.getElementById("form2").style.display='block';
+}
+function nextScreen(id){
+    document.getElementById(actuallPage).style.display='none';
+    actuallPage=id;
+    document.getElementById(actuallPage).style.display='block';
+    if (actuallPage == 1){
+      loadFlight();
+      return;
+    }
+    if (actuallPage == 2){
+      document.getElementById("rows").innerHTML=createRecord(records[actuallSelect],actuallSelect);
+      return;
+    }
+    
+}
+function getColor(freeSeat,i){
+  if (i == 1)
+    return 'w3-pale-blue';
+  else if (freeSeat == 0)
+    return 'w3-pale-red';
+  else  
+    return 'w3-blue';
+}
+function createRecord(obj,i){
+  category = getColor(obj.freeSeat,i);
+
+    return  '<div class="w3-panel w3-margin '+category+' w3-leftbar w3-rightbar w3-border-blue w3-opacity-min w3-hover-opacity-off" id="r'+i+'" onClick="select('+i+')"><p>'+
+      '<table class="w3-table w3-bordered">'+
+      '<tr><th>Odlot</th><th>'+obj.departue.substr(0, 10)+"</th></tr>"+
+      '<tr><td>Przylot</td><td>'+obj.arrival.substr(0, 10)+"</td></tr>"+
+      '<tr><td>Wolne miejsca</td><td>'+obj.freeSeat+"</td><td>Ilość miejsc</td><td>"+obj.numberOfSeat +"</td></tr>"+
+      '<tr><th>Cena</th><th>'+obj.price+"</th></tr>"+
+
+    '</table></p></div>';
+}
+var records;
+function loadFlight(){
+  document.getElementById("rows").innerHTML=waitforResult;
+  $.ajax({
+    url : "http://localhost:9000/flight",
+    method : "get",
+    })
+    .done(function(response){
+      records=response;
+      document.getElementById("rows").innerHTML="";
+      for (i=0;i<response.length;i++){
+        document.getElementById("rows").innerHTML += createRecord(response[i],i);
+      }
+      document.getElementById("FlightID").value = records[0].id;
+
+    });
+}
+var actuallSelect =0;
+
+function select(id){
+  if (records[id].freeSeat == 0){
+    alert("Brak miejsc na dany lot");
+    return;
+  }
+  document.getElementById("r"+actuallSelect).classList.remove("w3-opacity-off");
+  document.getElementById("r"+actuallSelect).classList.add("w3-opacity-min");
+
+  document.getElementById("r"+id).classList.add("w3-opacity-off");
+  document.getElementById("r"+id).classList.remove("w3-opacity-min");
+  actuallSelect = id;
+  document.getElementById("FlightID").value = records[actuallSelect].id;
+}
+
+
+function submitTourist(){
+  document.getElementById("rows").innerHTML=waitforResult;
+  var formData = {
+    name: document.getElementById("name").value,
+    sourname: document.getElementById("sourname").value,
+    sex: document.getElementById("sex").value,
+    country: document.getElementById("country").value,
+    notes: document.getElementById("notes").value,
+    birthDate: document.getElementById("birthDate").value 
+  } 
+  var jsonData = JSON.stringify(formData);
+
+
+  console.log(jsonData);
+  $.ajax({
+    method: "POST",
+    url: "http://localhost:9000/tourist",
+    data: jsonData,
+    contentType: "application/json"
+  })
+  .done(function(response){
+    document.getElementById("rows").innerHTML="";
+    document.getElementById("TouristID").value = parseInt(response);
+    document.getElementById("TouristID").disable = true;
+    nextScreen(4);
+  });
+}
+
+function submitFlight(){
+  document.getElementById("rows").innerHTML=waitforResult;
+
+  touristID = document.getElementById("TouristID").value;
+  flightID = document.getElementById("FlightID").value;
+  request = 'TouristID='+touristID+'&FlightID='+flightID;
+  $.ajax({
+    method: "PUT",
+    url: "http://localhost:9000/flight/add",
+    data: request
+  })
+  .done(function(response){
+    document.getElementById("rows").innerHTML="";
+    nextScreen(5);
+  });
+
+}
+</script>

@@ -1,0 +1,50 @@
+body{
+    height:100vh;  
+    background-image: url('image/background.jpg');
+    background-color: #000000;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+}
+.allPage{
+    min-height: 90%;
+}
+.board{
+    min-width: 100%;
+    padding: 20px;
+    min-height: 90%;
+    border: solid;
+    border-radius: 10px;
+    background-color: rgba(153, 147, 147, 0.3);
+    color: whitesmoke;
+    text-shadow:1px 1px 3px maroon;
+}
+.board input{
+    text-align: center;
+    max-width: 99%;
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+.input{
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+#rows{
+    overflow : auto;
+    max-height: 90vh;
+}
+.board H1{
+    font-size: 48pt;
+    margin-bottom: 50px;
+}
+.shadow :hover{
+    opacity: 1;
+    box-shadow: 1px 1px 10px yellowgreen;
+}
+.form input{
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+/* .board H1{
+    color: whitesmoke;
+} */
